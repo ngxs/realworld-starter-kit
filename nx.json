@@ -34,6 +34,9 @@
     },
     "data-access": {
       "tags": []
+    },
+    "article-list": {
+      "tags": []
     }
   }
 }

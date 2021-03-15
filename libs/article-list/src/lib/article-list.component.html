@@ -1,0 +1,34 @@
+<ng-container *ngIf="articles === null">
+  <div class="app-article-preview">
+    Loading articles...
+  </div>
+</ng-container>
+
+<ng-container *ngIf="articles?.length > 0">
+  <conduit-article-list-item
+    *ngFor="let article of articles"
+    [article]="article"
+    (favorite)="onFavorite($event)"
+    (unFavorite)="onFavorite($event)"
+  ></conduit-article-list-item>
+</ng-container>
+
+<ng-container *ngIf="articles?.length === 0">
+  <div class="app-article-preview">
+    No articles are here... yet.
+  </div>
+</ng-container>
+
+<ng-container *ngIf="pageInfo">
+  {{ pageInfo | json }}
+  <ul class="pagination">
+    <li
+      class="page-item"
+      [ngClass]="{ active: pageNumber === pageInfo.currentPage + 1 }"
+      *ngFor="let pageNumber of pageInfo.totalPages"
+      (click)="setPage.emit(pageNumber - 1)"
+    >
+      <a class="page-link">{{ pageNumber }}</a>
+    </li>
+  </ul>
+</ng-container>
