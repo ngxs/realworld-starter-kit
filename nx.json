@@ -37,6 +37,15 @@
     },
     "article-list": {
       "tags": []
+    },
+    "login": {
+      "tags": []
+    },
+    "register": {
+      "tags": []
+    },
+    "settings": {
+      "tags": []
     }
   }
 }

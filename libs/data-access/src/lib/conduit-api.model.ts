@@ -1,3 +1,5 @@
+import { User } from './+state/auth.model';
+
 export interface Profile {
   username: string;
   bio: string;
@@ -43,3 +45,37 @@ export interface Filters {
 }
 
 export type ListType = 'ALL' | 'FEED';
+export interface LoginResponse {
+  user: User;
+}
+
+export interface GetCurrentUserResponse {
+  user: User;
+}
+
+export interface UpdateCurrentUserResponse {
+  user: User;
+}
+
+export interface RegisterResponse {
+  user: User;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface RegisterRequest {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface UpdateAuthUserRequest {
+  email: string;
+  token: string;
+  username: string;
+  bio: string;
+  image: string;
+}

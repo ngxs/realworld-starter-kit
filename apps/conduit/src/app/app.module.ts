@@ -2,12 +2,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxsModule, NoopNgxsExecutionStrategy } from '@ngxs/store';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RoutingModule } from './routing.module';
+import { DataAccessModule } from '@realworld-angular-nx-ngxs/data-access';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -22,7 +25,10 @@ import { RoutingModule } from './routing.module';
         suppressErrors: false
       },
       executionStrategy: NoopNgxsExecutionStrategy
-    })
+    }),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot({ key: ['auth'] }),
+    DataAccessModule
   ],
   providers: [],
   bootstrap: [AppComponent]
