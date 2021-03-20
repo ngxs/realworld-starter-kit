@@ -1,6 +1,4 @@
-import {
-    ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Article } from '@realworld-angular-nx-ngxs/data-access';
 
 @Component({
@@ -11,15 +9,6 @@ import { Article } from '@realworld-angular-nx-ngxs/data-access';
 })
 export class ArticleListItemComponent {
   @Input() article: Article;
-  @Output() favorite: EventEmitter<string> = new EventEmitter();
-  @Output() unFavorite: EventEmitter<string> = new EventEmitter();
+  @Output() toggleFavorite: EventEmitter<Article> = new EventEmitter();
   @Output() navigateToArticle: EventEmitter<string> = new EventEmitter();
-
-  toggleFavorite(article: Article) {
-    if (article.favorited) {
-      this.unFavorite.emit(article.slug);
-    } else {
-      this.favorite.emit(article.slug);
-    }
-  }
 }

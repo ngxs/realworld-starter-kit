@@ -6,23 +6,36 @@
     </div>
   </div>
 
-  <div class="container page">
+  <div class="container page" *ngIf="pageInfo$ | async as pageInfo">
     <div class="row">
       <div class="col-md-9">
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              <a class="nav-link disabled" (click)="onArticleTypeChange('FEED')">Your Feed</a>
+              <button
+                class="nav-link"
+                [ngClass]="{'active': pageInfo.type === 'FEED', 'disabled': !(loggedIn$ | async)}"
+                [disabled]="!(loggedIn$ | async)"
+                (click)="onArticleTypeChange('FEED')"
+              >
+                Your Feed
+              </button>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" (click)="onArticleTypeChange('ALL')">Global Feed</a>
+              <button
+                class="nav-link active"
+                [ngClass]="{'active': pageInfo.type === 'ALL'}"
+                (click)="onArticleTypeChange('ALL')"
+              >
+                Global Feed
+              </button>
             </li>
           </ul>
         </div>
 
         <conduit-article-list
           [articles]="articleList$ | async"
-          [pageInfo]="pageInfo$ | async"
+          [pageInfo]="pageInfo"
           (setPage)="onSetPage($event)"
         ></conduit-article-list>
       </div>

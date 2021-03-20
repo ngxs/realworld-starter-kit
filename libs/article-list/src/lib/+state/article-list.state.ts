@@ -4,9 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
 import { patch } from '@ngxs/store/operators';
-import {
-    Article, ConduitApiService, Filters, ListConfig,
-} from '@realworld-angular-nx-ngxs/data-access';
+import { Article, ConduitApiService, Filters, ListConfig } from '@realworld-angular-nx-ngxs/data-access';
 
 import { ArticleListActions } from './article-list.actions';
 import { articleListInitialState, ArticleListModel } from './article-list.model';
@@ -59,6 +57,6 @@ export class ArticleListState {
 
   @Action(ArticleListActions.UnFavorite)
   unFavorite(ctx: StateContext<Article>, { articleSlug }: ArticleListActions.UnFavorite) {
-    return this.conduitApi.favoriteArticle(articleSlug).pipe(tap(() => ctx.dispatch(new ArticleListActions.Load())));
+    return this.conduitApi.unfavoriteArticle(articleSlug).pipe(tap(() => ctx.dispatch(new ArticleListActions.Load())));
   }
 }

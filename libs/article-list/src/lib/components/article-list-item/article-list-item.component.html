@@ -17,7 +17,7 @@
         'btn-primary': article.favorited
       }"
       class="btn btn-sm pull-xs-right"
-      (click)="toggleFavorite(article)"
+      (click)="toggleFavorite.emit(article)"
     >
       <i class="ion-heart"></i>
       <div class="info">{{ article.favoritesCount }}</div>

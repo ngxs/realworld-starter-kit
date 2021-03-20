@@ -8,8 +8,7 @@
   <conduit-article-list-item
     *ngFor="let article of articles"
     [article]="article"
-    (favorite)="onFavorite($event)"
-    (unFavorite)="onFavorite($event)"
+    (toggleFavorite)="toggleFavorite($event)"
   ></conduit-article-list-item>
 </ng-container>
 
@@ -20,7 +19,6 @@
 </ng-container>
 
 <ng-container *ngIf="pageInfo">
-  {{ pageInfo | json }}
   <ul class="pagination">
     <li
       class="page-item"

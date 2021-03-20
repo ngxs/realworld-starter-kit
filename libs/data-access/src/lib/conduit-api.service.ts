@@ -1,9 +1,7 @@
-import { map, pluck } from 'rxjs/operators';
-
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-
+import { map, pluck } from 'rxjs/operators';
 import type {
   Article,
   ArticlesResponse,
@@ -36,16 +34,21 @@ export class ConduitApiService {
       fromObject: listConfig.filters as any
     });
     return this.http.get<ArticlesResponse>(`${this.baseUrl}/articles${articlesType}`, {
+      headers: this.headers(),
       params
     });
   }
 
-  favoriteArticle(slug) {
-    return this.http.post<Article>(`${this.baseUrl}/articles/${slug}/favorite`, {}).pipe(pluck('article'));
+  favoriteArticle(slug: string) {
+    return this.http
+      .post<Article>(`${this.baseUrl}/articles/${slug}/favorite`, null, { headers: this.headers() })
+      .pipe(pluck('article'));
   }
 
-  unfavoriteArticle(slug) {
-    return this.http.delete<Article>(`${this.baseUrl}/articles/${slug}/favorite`).pipe(pluck('article'));
+  unfavoriteArticle(slug: string) {
+    return this.http
+      .delete<Article>(`${this.baseUrl}/articles/${slug}/favorite`, { headers: this.headers() })
+      .pipe(pluck('article'));
   }
 
   login(loginRequest: LoginRequest) {

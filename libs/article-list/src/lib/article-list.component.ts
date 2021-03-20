@@ -1,11 +1,6 @@
-import { Observable } from 'rxjs';
-
-import {
-    ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Article } from '@realworld-angular-nx-ngxs/data-access';
-
 import { ArticleListActions } from './+state/article-list.actions';
 import { PageInfo } from './+state/article-list.model';
 
@@ -26,11 +21,11 @@ export class ArticleListComponent implements OnInit {
     this.store.dispatch(new ArticleListActions.Load());
   }
 
-  onFavorite(slug): void {
-    this.store.dispatch(new ArticleListActions.Favorite(slug));
-  }
+  toggleFavorite(article: Article): void {
+    const action = article.favorited
+      ? new ArticleListActions.UnFavorite(article.slug)
+      : new ArticleListActions.Favorite(article.slug);
 
-  onUnFavorite(slug): void {
-    this.store.dispatch(new ArticleListActions.UnFavorite(slug));
+    this.store.dispatch(action);
   }
 }

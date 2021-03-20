@@ -1,4 +1,5 @@
 import { Article, ListConfig } from '@realworld-angular-nx-ngxs/data-access';
+import { ListType } from '../../../../data-access/src/lib/conduit-api.model';
 
 export interface ArticleListModel {
   articles: Article[];
@@ -7,6 +8,7 @@ export interface ArticleListModel {
 }
 
 export interface PageInfo {
+  type: ListType;
   currentPage: number;
   totalPages: number[];
 }

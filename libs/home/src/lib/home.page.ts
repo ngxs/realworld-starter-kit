@@ -1,12 +1,14 @@
-import { Observable } from 'rxjs';
-
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import {
-    ArticleListActions, articleListInitialState, ArticleListSelectors, PageInfo,
+  ArticleListActions,
+  articleListInitialState,
+  ArticleListSelectors,
+  PageInfo
 } from '@realworld-angular-nx-ngxs/article-list';
-
 import type { Article, ListType } from '@realworld-angular-nx-ngxs/data-access';
+import { AuthSelectors } from '@realworld-angular-nx-ngxs/data-access';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'conduit-home',
@@ -14,6 +16,7 @@ import type { Article, ListType } from '@realworld-angular-nx-ngxs/data-access';
   styleUrls: ['./home.page.css']
 })
 export class HomePage {
+  @Select(AuthSelectors.loggedIn) loggedIn$: Observable<boolean>;
   @Select(ArticleListSelectors.slices.articles) articleList$: Observable<Article[]>;
   @Select(ArticleListSelectors.pageInfo) pageInfo$: Observable<PageInfo>;
 
