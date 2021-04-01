@@ -1,8 +1,8 @@
 import { Selector } from '@ngxs/store';
 
 import { createPropertySelectors } from '../../ngxs-next';
-import { User } from './auth.model';
-import { AuthState, AuthStateModel } from './auth.state';
+import { AuthStateModel, User } from './auth.model';
+import { AuthState } from './auth.state';
 
 export class AuthSelectors {
   static slices = createPropertySelectors<AuthStateModel>(AuthState);

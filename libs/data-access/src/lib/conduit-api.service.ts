@@ -1,10 +1,12 @@
-import { map } from 'rxjs/operators';
-
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import {
+import { Store } from '@ngxs/store';
+import { map, pluck } from 'rxjs/operators';
+import type {
+  Article,
+  ArticlesResponse,
   GetCurrentUserResponse,
+  ListConfig,
   LoginRequest,
   LoginResponse,
   RegisterRequest,
@@ -13,7 +15,6 @@ import {
   UpdateAuthUserRequest,
   UpdateCurrentUserResponse
 } from './conduit-api.model';
-import { Store } from '@ngxs/store';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,29 @@ export class ConduitApiService {
 
   getTags() {
     return this.http.get<TagsResponse>(`${this.baseUrl}/tags`).pipe(map((response) => response.tags));
+  }
+
+  getArticles(listConfig: ListConfig) {
+    const articlesType = listConfig.type === 'FEED' ? '/feed' : '';
+    const params = new HttpParams({
+      fromObject: listConfig.filters as any
+    });
+    return this.http.get<ArticlesResponse>(`${this.baseUrl}/articles${articlesType}`, {
+      headers: this.headers(),
+      params
+    });
+  }
+
+  favoriteArticle(slug: string) {
+    return this.http
+      .post<Article>(`${this.baseUrl}/articles/${slug}/favorite`, null, { headers: this.headers() })
+      .pipe(pluck('article'));
+  }
+
+  unfavoriteArticle(slug: string) {
+    return this.http
+      .delete<Article>(`${this.baseUrl}/articles/${slug}/favorite`, { headers: this.headers() })
+      .pipe(pluck('article'));
   }
 
   login(loginRequest: LoginRequest) {
