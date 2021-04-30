@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 import { AuthSelectors, GetAuthUser, Logout, UpdateAuthUser } from '@realworld-angular-nx-ngxs/data-access';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'realworld-angular-nx-ngxs-settings',

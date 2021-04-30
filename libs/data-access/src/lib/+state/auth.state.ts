@@ -57,6 +57,12 @@ export class AuthState {
     return this.conduitApi.getAuthUser().pipe(
       tap((user) => {
         ctx.patchState({ user });
+      }),
+      catchError((err) => {
+        ctx.patchState({
+          user: null
+        });
+        return throwError(err);
       })
     );
   }
