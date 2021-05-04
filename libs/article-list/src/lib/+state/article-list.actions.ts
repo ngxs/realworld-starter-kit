@@ -5,6 +5,16 @@ export namespace ArticleListActions {
     static readonly type = '[ArticleList] Load';
     constructor(public readonly offset = 0) {}
   }
+
+  export class GetMyArticles {
+    static readonly type = '[ArticleList] GetMyArticles';
+    constructor() {}
+  }
+
+  export class GetMyFavArticles {
+    static readonly type = '[ArticleList] GetMyFavArticles';
+    constructor() {}
+  }
   export class Favorite {
     static readonly type = '[ArticleList] Favorite';
     constructor(public readonly articleSlug: string) {}

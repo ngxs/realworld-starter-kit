@@ -2,9 +2,9 @@ import { tap } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Action, State, StateContext } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 import { patch } from '@ngxs/store/operators';
-import { Article, ConduitApiService, Filters, ListConfig } from '@realworld-angular-nx-ngxs/data-access';
+import { Article, AuthSelectors, ConduitApiService, Filters, ListConfig } from '@realworld-angular-nx-ngxs/data-access';
 
 import { ArticleListActions } from './article-list.actions';
 import { articleListInitialState, ArticleListModel } from './article-list.model';
@@ -15,7 +15,7 @@ import { articleListInitialState, ArticleListModel } from './article-list.model'
 })
 @Injectable()
 export class ArticleListState {
-  constructor(private conduitApi: ConduitApiService) {}
+  constructor(private conduitApi: ConduitApiService, private store: Store) {}
 
   @Action(ArticleListActions.SetPage)
   setPage(ctx: StateContext<ArticleListModel>, { page }: ArticleListActions.SetPage) {
@@ -58,5 +58,21 @@ export class ArticleListState {
   @Action(ArticleListActions.UnFavorite)
   unFavorite(ctx: StateContext<Article>, { articleSlug }: ArticleListActions.UnFavorite) {
     return this.conduitApi.unfavoriteArticle(articleSlug).pipe(tap(() => ctx.dispatch(new ArticleListActions.Load())));
+  }
+
+  @Action(ArticleListActions.GetMyArticles)
+  getMyArticles(ctx: StateContext<ArticleListModel>, {}: ArticleListActions.GetMyArticles) {
+    const username = this.store.selectSnapshot(AuthSelectors.username);
+    return this.conduitApi
+      .getArticles({ filters: { author: username } } as ListConfig)
+      .pipe(tap(({ articles, articlesCount }) => ctx.setState(patch({ articles, articlesCount }))));
+  }
+
+  @Action(ArticleListActions.GetMyFavArticles)
+  getMyFavArticles(ctx: StateContext<ArticleListModel>, {}: ArticleListActions.GetMyFavArticles) {
+    const username = this.store.selectSnapshot(AuthSelectors.username);
+    return this.conduitApi
+      .getArticles({ filters: { favorited: username } } as ListConfig)
+      .pipe(tap(({ articles, articlesCount }) => ctx.setState(patch({ articles, articlesCount }))));
   }
 }

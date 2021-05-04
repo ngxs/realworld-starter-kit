@@ -1,11 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { map, pluck } from 'rxjs/operators';
+import { map, mapTo, pluck } from 'rxjs/operators';
 import type {
   Article,
   ArticlesResponse,
   GetCurrentUserResponse,
+  GetProfileResponse,
   ListConfig,
   LoginRequest,
   LoginResponse,
@@ -69,6 +70,28 @@ export class ConduitApiService {
         headers: this.headers()
       })
       .pipe(map((response) => response.user));
+  }
+
+  getProfile(userName: string) {
+    return this.http
+      .get<GetProfileResponse>(`${this.baseUrl}/profiles/${userName}`)
+      .pipe(map((response) => response.profile));
+  }
+
+  followProfile(userName: string) {
+    return this.http
+      .post<GetCurrentUserResponse>(`${this.baseUrl}/profiles/${userName}/follow`, {
+        headers: this.headers()
+      })
+      .pipe(mapTo(true));
+  }
+
+  unfollowProfile(userName: string) {
+    return this.http
+      .delete<GetCurrentUserResponse>(`${this.baseUrl}/profiles/${userName}/follow`, {
+        headers: this.headers()
+      })
+      .pipe(mapTo(true));
   }
 
   private headers() {

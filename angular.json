@@ -281,6 +281,35 @@
           "style": "scss"
         }
       }
+    },
+    "profile": {
+      "projectType": "library",
+      "root": "libs/profile",
+      "sourceRoot": "libs/profile/src",
+      "prefix": "conduit",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/profile/tsconfig.lib.json", "libs/profile/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/profile/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/profile/jest.config.js",
+            "tsConfig": "libs/profile/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/profile/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

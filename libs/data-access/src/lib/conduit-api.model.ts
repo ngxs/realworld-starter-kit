@@ -7,7 +7,6 @@ export interface Profile {
   following: boolean;
   loading: boolean;
 }
-
 export interface Article {
   slug: string;
   title: string;
@@ -51,6 +50,10 @@ export interface LoginResponse {
 
 export interface GetCurrentUserResponse {
   user: User;
+}
+
+export interface GetProfileResponse {
+  profile: Profile;
 }
 
 export interface UpdateCurrentUserResponse {
