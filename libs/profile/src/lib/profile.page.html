@@ -25,10 +25,16 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-md-10 offset-md-1">
-        <div class="articles-toggle">
+        <div class="articles-toggle mb-3">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['./']">My Articles</a>
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                [routerLink]="['./']"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >My Articles</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['favorites']">Favorited Articles</a>

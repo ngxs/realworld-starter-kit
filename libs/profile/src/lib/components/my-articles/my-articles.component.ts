@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { ArticleListSelectors } from '@realworld-angular-nx-ngxs/article-list';
+import { ArticleListActions, ArticleListSelectors } from '@realworld-angular-nx-ngxs/article-list';
 
 @Component({
   selector: 'conduit-my-articles',
@@ -13,5 +13,7 @@ export class MyArticlesComponent implements OnInit {
 
   constructor(private store: Store) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new ArticleListActions.GetMyArticles());
+  }
 }
