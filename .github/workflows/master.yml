@@ -28,7 +28,7 @@ jobs:
       - name: Lint
         run: yarn lint
       - name: Format
-        run: yarn format:check
+        run: yarn format:check --base=origin/master
       - name: Test
         run: yarn test
       - name: Build and Deploy
