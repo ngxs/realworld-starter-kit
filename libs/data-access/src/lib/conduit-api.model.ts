@@ -90,3 +90,7 @@ export interface CreateArticleResponse {
 }
 
 export type UpdateArticleResponse = CreateArticleResponse;
+
+export type GetArticleResponse = {
+  article: Article;
+};

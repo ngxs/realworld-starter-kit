@@ -7,6 +7,7 @@ import type {
   ArticlesResponse,
   CreateArticleRequest,
   CreateArticleResponse,
+  GetArticleResponse,
   GetCurrentUserResponse,
   ListConfig,
   LoginRequest,
@@ -97,11 +98,15 @@ export class ConduitApiService {
       .pipe(map((response) => response.article));
   }
 
-  updatedArticle(updateArticleRequest: UpdateArticleRequest) {
+  updateArticle(updateArticleRequest: UpdateArticleRequest) {
     return this.http
-      .put<UpdateArticleResponse>(`${this.baseUrl}/articles`, updateArticleRequest, {
-        headers: this.headers()
-      })
+      .put<UpdateArticleResponse>(
+        `${this.baseUrl}/articles/${updateArticleRequest.article.slug}`,
+        updateArticleRequest,
+        {
+          headers: this.headers()
+        }
+      )
       .pipe(map((response) => response.article));
   }
 
@@ -111,5 +116,13 @@ export class ConduitApiService {
         headers: this.headers()
       })
       .pipe(mapTo(true));
+  }
+
+  getArticle(slug: string) {
+    return this.http
+      .get<GetArticleResponse>(`${this.baseUrl}/articles/${slug}`, {
+        headers: this.headers()
+      })
+      .pipe(map((response) => response.article));
   }
 }
