@@ -1,10 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { map, pluck } from 'rxjs/operators';
+import { map, mapTo, pluck } from 'rxjs/operators';
 import type {
   Article,
   ArticlesResponse,
+  CreateArticleRequest,
+  CreateArticleResponse,
   GetCurrentUserResponse,
   ListConfig,
   LoginRequest,
@@ -12,6 +14,8 @@ import type {
   RegisterRequest,
   RegisterResponse,
   TagsResponse,
+  UpdateArticleRequest,
+  UpdateArticleResponse,
   UpdateAuthUserRequest,
   UpdateCurrentUserResponse
 } from './conduit-api.model';
@@ -83,5 +87,29 @@ export class ConduitApiService {
     return this.http
       .put<UpdateCurrentUserResponse>(`${this.baseUrl}/user`, updateAuthUserRequest, { headers: this.headers() })
       .pipe(map((response) => response.user));
+  }
+
+  createArticle(createArticleRequest: CreateArticleRequest) {
+    return this.http
+      .post<CreateArticleResponse>(`${this.baseUrl}/articles`, createArticleRequest, {
+        headers: this.headers()
+      })
+      .pipe(map((response) => response.article));
+  }
+
+  updatedArticle(updateArticleRequest: UpdateArticleRequest) {
+    return this.http
+      .put<UpdateArticleResponse>(`${this.baseUrl}/articles`, updateArticleRequest, {
+        headers: this.headers()
+      })
+      .pipe(map((response) => response.article));
+  }
+
+  deleteArticle(slug: string) {
+    return this.http
+      .delete(`${this.baseUrl}/articles/${slug}`, {
+        headers: this.headers()
+      })
+      .pipe(mapTo(true));
   }
 }
