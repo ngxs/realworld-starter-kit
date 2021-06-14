@@ -31,12 +31,12 @@ jobs:
       - name: Install
         run: yarn install
       - name: Lint
-        run: yarn lint --base=origin/master
+        run: yarn lint
       - name: Format
-        run: yarn format:check --base=origin/master
+        run: yarn format:check
       - name: Test
         run: yarn test
-      - name: Build and Deploy --base=origin/master
+      - name: Build and Deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn deploy
