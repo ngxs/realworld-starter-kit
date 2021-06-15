@@ -292,22 +292,22 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["libs/profile/tsconfig.lib.json", "libs/profile/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/profile/**/*"]
+            "exclude": ["**/node_modules/**", "!libs/profile/**/*"],
             "tsConfig": ["libs/editor/tsconfig.lib.json", "libs/editor/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!libs/editor/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "options": {        
+          "options": {
             "jestConfig": "libs/editor/jest.config.js",
             "tsConfig": "libs/editor/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "libs/editor/src/test-setup.ts"
           }
         }
-      },
-    }
+      }
+    },
     "profile": {
       "projectType": "library",
       "root": "libs/profile",
@@ -327,7 +327,7 @@
             "jestConfig": "libs/profile/jest.config.js",
             "tsConfig": "libs/profile/tsconfig.spec.json",
             "passWithNoTests": true,
-            "setupFile": "libs/profile/src/test-setup.ts"            
+            "setupFile": "libs/profile/src/test-setup.ts"
           }
         }
       },
