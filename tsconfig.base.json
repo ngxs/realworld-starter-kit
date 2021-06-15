@@ -22,6 +22,7 @@
       "@realworld-angular-nx-ngxs/login": ["libs/login/src/index.ts"],
       "@realworld-angular-nx-ngxs/register": ["libs/register/src/index.ts"],
       "@realworld-angular-nx-ngxs/settings": ["libs/settings/src/index.ts"],
+      "@realworld-angular-nx-ngxs/profile": ["libs/profile/src/index.ts"],
       "@realworld-angular-nx-ngxs/editor": ["libs/editor/src/index.ts"],
       "@realworld-angular-nx-ngxs/utils": ["libs/utils/src/index.ts"]
     }

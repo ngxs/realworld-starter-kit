@@ -15,7 +15,9 @@
         <a class="nav-link" [routerLink]="['/settings']"> <i class="ion-gear-a"></i>&nbsp;Settings </a>
       </li>
       <li *ngIf="loggedIn$ | async" class="nav-item">
-        <span class="nav-link"> {{ username$ | async }} </span>
+        <a class="nav-link" [routerLink]="['/profile', username$ | async]" routerLinkActive="active">
+          {{ username$ | async }}
+        </a>
       </li>
       <li *ngIf="loggedOut$ | async" class="nav-item">
         <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Sign in</a>

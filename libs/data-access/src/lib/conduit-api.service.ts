@@ -9,6 +9,7 @@ import type {
   CreateArticleResponse,
   GetArticleResponse,
   GetCurrentUserResponse,
+  GetProfileResponse,
   ListConfig,
   LoginRequest,
   LoginResponse,
@@ -74,6 +75,28 @@ export class ConduitApiService {
         headers: this.headers()
       })
       .pipe(map((response) => response.user));
+  }
+
+  getProfile(userName: string) {
+    return this.http
+      .get<GetProfileResponse>(`${this.baseUrl}/profiles/${userName}`)
+      .pipe(map((response) => response.profile));
+  }
+
+  followProfile(userName: string) {
+    return this.http
+      .post<GetCurrentUserResponse>(`${this.baseUrl}/profiles/${userName}/follow`, {
+        headers: this.headers()
+      })
+      .pipe(mapTo(true));
+  }
+
+  unfollowProfile(userName: string) {
+    return this.http
+      .delete<GetCurrentUserResponse>(`${this.baseUrl}/profiles/${userName}/follow`, {
+        headers: this.headers()
+      })
+      .pipe(mapTo(true));
   }
 
   private headers() {
