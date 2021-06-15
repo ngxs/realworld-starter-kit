@@ -46,6 +46,12 @@
     },
     "settings": {
       "tags": []
+    },
+    "editor": {
+      "tags": []
+    },
+    "utils": {
+      "tags": []
     }
   }
 }

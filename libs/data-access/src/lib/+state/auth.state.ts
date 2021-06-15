@@ -6,12 +6,8 @@ import { Action, State, StateContext } from '@ngxs/store';
 
 import { ConduitApiService } from '../conduit-api.service';
 import { GetAuthUser, Login, Logout, Register, UpdateAuthUser } from './auth.actions';
-
 import type { AuthStateModel } from './auth.model';
-
-function parseError(err) {
-  return Object.keys(err.error.errors).map((key) => `${key} ${err.error.errors[key]}`);
-}
+import { parseError } from '@realworld-angular-nx-ngxs/utils';
 
 @State<AuthStateModel>({
   name: 'auth',

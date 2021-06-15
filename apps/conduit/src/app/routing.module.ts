@@ -6,6 +6,7 @@ export const routes: Route[] = [
   { path: 'login', loadChildren: () => import('@realworld-angular-nx-ngxs/login').then((m) => m.LoginModule) },
   { path: 'sign-up', loadChildren: () => import('@realworld-angular-nx-ngxs/register').then((m) => m.RegisterModule) },
   { path: 'settings', loadChildren: () => import('@realworld-angular-nx-ngxs/settings').then((m) => m.SettingsModule) },
+  { path: 'editor', loadChildren: () => import('@realworld-angular-nx-ngxs/editor').then((m) => m.EditorModule) },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
