@@ -50,5 +50,11 @@
     "profile": {
       "tags": []
     }
+    "editor": {
+      "tags": []
+    },
+    "utils": {
+      "tags": []
+    }
   }
 }

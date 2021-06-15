@@ -82,3 +82,18 @@ export interface UpdateAuthUserRequest {
   bio: string;
   image: string;
 }
+
+export interface CreateArticleRequest {
+  article: Article;
+}
+
+export type UpdateArticleRequest = CreateArticleRequest;
+export interface CreateArticleResponse {
+  article;
+}
+
+export type UpdateArticleResponse = CreateArticleResponse;
+
+export type GetArticleResponse = {
+  article: Article;
+};

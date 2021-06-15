@@ -1,0 +1,9 @@
+<div class="editor-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-10 offset-md-1 col-xs-12">
+        <conduit-article-form [article]="article$ | async" (onSubmit)="submit($event)"></conduit-article-form>
+      </div>
+    </div>
+  </div>
+</div>

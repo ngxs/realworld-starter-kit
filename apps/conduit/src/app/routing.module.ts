@@ -10,6 +10,7 @@ export const routes: Route[] = [
     path: 'profile/:user',
     loadChildren: () => import('@realworld-angular-nx-ngxs/profile').then((m) => m.ProfileModule)
   },
+  { path: 'editor', loadChildren: () => import('@realworld-angular-nx-ngxs/editor').then((m) => m.EditorModule) },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

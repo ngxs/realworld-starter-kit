@@ -7,7 +7,9 @@
         <a class="nav-link active" [routerLink]="['/home']">Home</a>
       </li>
       <li *ngIf="loggedIn$ | async" class="nav-item">
-        <a class="nav-link" href=""> <i class="ion-compose"></i>&nbsp;New Article </a>
+        <a class="nav-link" [routerLink]="['/editor']" routerLinkActive="active">
+          <i class="ion-compose"></i>&nbsp;New Article
+        </a>
       </li>
       <li *ngIf="loggedIn$ | async" class="nav-item">
         <a class="nav-link" [routerLink]="['/settings']"> <i class="ion-gear-a"></i>&nbsp;Settings </a>
