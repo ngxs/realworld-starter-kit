@@ -1,6 +1,4 @@
-import { Article, ListConfig } from '@realworld-angular-nx-ngxs/data-access';
-import { ListType } from '../../../../data-access/src/lib/conduit-api.model';
-
+import { Article, ListConfig, ListType } from '@realworld-angular-nx-ngxs/data-access';
 export interface ArticleListModel {
   articles: Article[];
   articlesCount: number;
