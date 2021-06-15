@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
-import { AuthSelectors, GetAuthUser, UpdateAuthUser } from '@realworld-angular-nx-ngxs/data-access';
+import { AuthSelectors, GetAuthUser, Logout, UpdateAuthUser } from '@realworld-angular-nx-ngxs/data-access';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'realworld-angular-nx-ngxs-settings',
@@ -30,5 +33,11 @@ export class SettingsPage implements OnInit {
   updateSettings() {
     const authUser = this.form.value;
     this.store.dispatch(new UpdateAuthUser(authUser));
+  }
+
+  logout() {
+    this.store.dispatch(new Logout()).subscribe(() => {
+      this.store.dispatch(new Navigate(['/home']));
+    });
   }
 }
